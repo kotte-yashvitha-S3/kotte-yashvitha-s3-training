@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow - Practice App (Flexbox)</title>
+  <style>
+    /* =========================================
+       1. RESET & FLEXBOX STICKY FOOTER LAYOUT
+       ========================================= */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8fafc;
+      color: #1e293b;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* =========================================
+       2. FLEXBOX NAVBAR
+       ========================================= */
+    header {
+      background-color: #0f172a;
+      color: #ffffff;
+      padding: 16px 0;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #38bdf8;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 24px;
+    }
+
+    .nav-links button {
+      background: none;
+      border: none;
+      color: #e2e8f0;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      padding-bottom: 4px;
+      font-family: inherit;
+    }
+
+    .nav-links button:hover,
+    .nav-links button.active {
+      color: #38bdf8;
+      border-bottom: 2px solid #38bdf8;
+    }
+
+    /* Page Switching Visibility */
+    .page {
+      display: none;
+    }
+
+    .page.active-page {
+      display: block;
+    }
+
+    /* =========================================
+       3. FLEXBOX HERO SECTION (HOME PAGE)
+       ========================================= */
+    .hero {
+      background-color: #e0f2fe;
+      padding: 60px 0;
+    }
+
+    .hero-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .hero-content {
+      flex: 1 1 450px;
+    }
+
+    .hero-content h1 {
+      font-size: 2.4rem;
+      color: #0f172a;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .hero-content p {
+      font-size: 1.1rem;
+      color: #334155;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .hero-box {
+      flex: 1 1 350px;
+      background: #0284c7;
+      color: white;
+      padding: 40px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 220px;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+    }
+
+    .hero-box h2 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #0284c7;
+      color: #ffffff;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #0369a1;
+    }
+
+    /* =========================================
+       4. FLEXBOX CARDS & LIST SECTION
+       ========================================= */
+    .section {
+      padding: 50px 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .section-header h1,
+    .section-header h2 {
+      color: #0f172a;
+    }
+
+    .card-flex-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      flex: 1 1 300px;
+      max-width: 350px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card h3 {
+      color: #0f172a;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #475569;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .badge {
+      display: inline-block;
+      background-color: #e0f2fe;
+      color: #0369a1;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 12px;
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+
+    .status-done {
+      color: #059669;
+      font-weight: 700;
+    }
+
+    .status-active {
+      color: #0284c7;
+      font-weight: 700;
+    }
+
+    /* =========================================
+       5. FOOTER
+       ========================================= */
+    footer {
+      background-color: #0f172a;
+      color: #94a3b8;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Navigation -->
+  <header>
+    <div class="container navbar">
+      <div class="logo" onclick="showPage('home')">TaskFlow</div>
+      <ul class="nav-links">
+        <li><button id="nav-home" class="active" onclick="showPage('home')">Home</button></li>
+        <li><button id="nav-list" onclick="showPage('list')">Task List</button></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- =====================================
+         PAGE 1: HOME PAGE
+         ===================================== -->
+    <div id="home-page" class="page active-page">
+      <section class="hero">
+        <div class="container hero-flex">
+          <div class="hero-content">
+            <h1>Organize Your Daily Practice</h1>
+            <p>A clean, Flexbox-powered practice application to track your frontend modules, coding tasks, and project milestones.</p>
+            <button class="btn" onclick="showPage('list')">View All Tasks &rarr;</button>
+          </div>
+          <div class="hero-box">
+            <h2>6 Active Modules</h2>
+            <p>HTML • CSS Flexbox • Forms • Fetch API</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2>How It Works</h2>
+          </div>
+          <div class="card-flex-container">
+            <div class="card">
+              <div>
+                <span class="badge">Step 1</span>
+                <h3>Plan Topics</h3>
+                <p>Break down your web development curriculum into manageable daily exercises.</p>
+              </div>
+              <div class="card-footer">
+                <span>Status: Ready</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div>
+                <span class="badge">Step 2</span>
+                <h3>Build Layouts</h3>
+                <p>Practice Flexbox alignment, wrapping, and spacing across different screen sizes.</p>
+              </div>
+              <div class="card-footer">
+                <span>Status: In Progress</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div>
+                <span class="badge">Step 3</span>
+                <h3>Review &amp; Commit</h3>
+                <p>Verify your output in the browser and push clean code to your repository.</p>
+              </div>
+              <div class="card-footer">
+                <span>Status: Upcoming</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- =====================================
+         PAGE 2: LIST PAGE
+         ===================================== -->
+    <div id="list-page" class="page">
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <h1>Practice Task List</h1>
+              <p>All assigned self-practice modules arranged with Flexbox wrap.</p>
+            </div>
+            <button class="btn" onclick="showPage('home')">&larr; Back to Home</button>
+          </div>
+
+          <div class="card-flex-container">
+            <div class="card">
+              <div>
+                <span class="badge">JavaScript</span>
+                <h3>Fetch API User Cards</h3>
+                <p>Retrieve user profiles from JSONPlaceholder API and render dynamic DOM cards.</p>
+              </div>
+              <div class="card-footer">
+                <span>Difficulty: Medium</span>
+                <span class="status-done">Completed</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div>
+                <span class="badge">Responsive CSS</span>
+                <h3>Responsive Landing Page</h3>
+                <p>Create a mobile-first layout tested at 375px and 1280px viewports.</p>
+              </div>
+              <div class="card-footer">
+                <span>Difficulty: Medium</span>
+                <span class="status-done">Completed</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div>
+                <span class="badge">Accessibility</span>
+                <h3>Accessible Signup Form</h3>
+                <p>Implement form labels, keyboard navigation, and client-side validation messages.</p>
+              </div>
+              <div class="card-footer">
+                <span>Difficulty: Medium</span>
+                <span class="status-done">Completed</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div>
+                <span class="badge">Flexbox</span>
+                <h3>Practice App Pages</h3>
