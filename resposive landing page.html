@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Essential for responsive design on 375px screens -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Landing Page</title>
+  <style>
+    /* 1. RESET & BASE STYLES (Mobile-First: 375px default) */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f9fafb;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Container keeps content centered and prevents overflow */
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* 2. NAVIGATION BAR */
+    header {
+      background: #ffffff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      padding: 15px 0;
+    }
+
+    .nav-wrapper {
+      display: flex;
+      flex-direction: column; /* Stacked on 375px mobile */
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #2563eb;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 15px;
+      list-style: none;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: #2563eb;
+    }
+
+    /* 3. HERO SECTION */
+    .hero {
+      padding: 40px 0;
+      background: #eff6ff;
+      text-align: center; /* Centered on mobile */
+    }
+
+    .hero-wrapper {
+      display: flex;
+      flex-direction: column; /* Stacked on 375px mobile */
+      align-items: center;
+      gap: 30px;
+    }
+
+    .hero-text h1 {
+      font-size: 1.8rem; /* Mobile heading size */
+      color: #1e3a8a;
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+
+    .hero-text p {
+      font-size: 1rem;
+      color: #4b5563;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #2563eb;
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 4. FEATURES GRID SECTION */
+    .features {
+      padding: 50px 0;
+      text-align: center;
+    }
+
+    .features h2 {
+      font-size: 1.6rem;
+      margin-bottom: 30px;
+      color: #1f2937;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr; /* 1 column on 375px mobile */
+      gap: 20px;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .card h3 {
+      color: #2563eb;
+      margin-bottom: 10px;
+    }
+
+    /* 5. FOOTER */
+    footer {
+      background: #1f2937;
+      color: #d1d5db;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 0.9rem;
+    }
+
+    /* =========================================
+       6. MEDIA QUERIES FOR TABLET & DESKTOP (1280px)
+       ========================================= */
+    @media (min-width: 768px) {
+      /* Navbar becomes horizontal */
+      .nav-wrapper {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      /* Features become 3 columns */
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      /* Hero becomes side-by-side (50% text, 50% image) */
+      .hero {
+        padding: 80px 0;
+        text-align: left;
+      }
+
+      .hero-wrapper {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .hero-text {
+        flex: 1;
+        padding-right: 40px;
+      }
+
+      .hero-text h1 {
+        font-size: 2.8rem; /* Larger desktop heading */
+      }
+
+      .hero-image {
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header / Navbar -->
+  <header>
+    <div class="container nav-wrapper">
+      <div class="logo">BrandLogo</div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="container hero-wrapper">
+      <div class="hero-text">
+        <h1>Build Modern Responsive Websites</h1>
+        <p>Learn how to structure layouts with Flexbox, CSS Grid, and Media Queries so your site looks great on any device.</p>
+        <a href="#features" class="btn">Get Started</a>
+      </div>
+      <div class="hero-image">
+        <img src="https://placeholder.com" alt="Hero Illustration">
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="container">
+      <h2>Core Features</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Mobile First (375px)</h3>
+          <p>Designed from the smallest screen up so content never overflows horizontally.</p>
+        </div>
+        <div class="card">
+          <h3>Flexible Layouts</h3>
+          <p>Uses Flexbox and CSS Grid to stack items on mobile and align them on desktop.</p>
+        </div>
+        <div class="card">
+          <h3>Desktop Ready (1280px)</h3>
+          <p>Media queries expand typography, spacing, and multi-column grids for wide monitors.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 BrandLogo. Built for Responsive Design Practice.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
